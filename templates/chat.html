@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset='UTF-8'>
+  <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="robots" content="noindex">
+  <link rel="shortcut icon" type="image/x-icon" href="//production-assets.codepen.io/assets/favicon/favicon-8ea04875e70c4b0bb41da869e81236e54394d63638a1ef12fa558a4a835f1164.ico" />
+  <link rel="mask-icon" type="" href="//production-assets.codepen.io/assets/favicon/logo-pin-f2d2b6d2c61838f7e76325261b7195c27224080bc099486ddd6dccb469b8e8e6.svg" color="#111" />
+  <link rel="canonical" href="https://codepen.io/emilcarlsson/pen/ZOQZaV?limit=all&page=74&q=contact+" />
+  <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,600,700,300' rel='stylesheet' type='text/css'>
+  <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/socket.io/1.3.6/socket.io.min.js"></script>
+  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+
+  <link rel='stylesheet prefetch' href='https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css'>
+  <link rel='stylesheet prefetch' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.2/css/font-awesome.min.css'>
+  <link rel="stylesheet" href="/static/css/style.css?v=1">
+</head>
+
+<body>
+
+  <div id="frame">
+    <div id="sidepanel">
+      <div id="profile">
+        <div class="wrap">
+          <img id="profile-img" src="http://facharbeit-app.ddns.net:5000/static/profilbildfrau.png" class="online" alt="" />
+          <p id="name"></p>
+          <i class="fa fa-chevron-down expand-button" aria-hidden="true"></i>
+          <div id="status-options">
+            <ul>
+              <li id="status-online" class="active"><span class="status-circle"></span>
+                <p>Online</p>
+              </li>
+              <li id="status-away"><span class="status-circle"></span>
+                <p>Away</p>
+              </li>
+              <li id="status-busy"><span class="status-circle"></span>
+                <p>Busy</p>
+              </li>
+              <li id="status-offline"><span class="status-circle"></span>
+                <p>Offline</p>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div id="search">
+        <label for=""><i class="fa fa-search" aria-hidden="true"></i></label>
+        <input type="text" placeholder="Search contacts..." />
+      </div>
+      <div id="contacts">
+        <ul>
+          <!--
+          <li class="contact">
+            <div class="wrap">
+              <span class="contact-status online"></span>
+              <img src="http://emilcarlsson.se/assets/louislitt.png" alt="" />
+              <div class="meta">
+                <p class="name">Louis Litt</p>
+                <p class="preview">You just got LITT up, Mike.</p>
+              </div>
+            </div>
+          </li>
+          <li class="contact active">
+            <div class="wrap">
+              <span class="contact-status busy"></span>
+              <img src="http://emilcarlsson.se/assets/harveyspecter.png" alt="" />
+              <div class="meta">
+                <p class="name">Harvey Specter</p>
+                <p class="preview">Wrong. You take the gun, or you pull out a bigger one. Or, you call their bluff. Or, you do any one of a hundred and forty six other things.</p>
+              </div>
+            </div>
+          </li>
+          <li class="contact">
+            <div class="wrap">
+              <span class="contact-status away"></span>
+              <img src="http://emilcarlsson.se/assets/rachelzane.png" alt="" />
+              <div class="meta">
+                <p class="name">Rachel Zane</p>
+                <p class="preview">I was thinking that we could have chicken tonight, sounds good?</p>
+              </div>
+            </div>
+          </li>
+          <li class="contact">
+            <div class="wrap">
+              <span class="contact-status online"></span>
+              <img src="http://emilcarlsson.se/assets/donnapaulsen.png" alt="" />
+              <div class="meta">
+                <p class="name">Donna Paulsen</p>
+                <p class="preview">Mike, I know everything! I'm Donna..</p>
+              </div>
+            </div>
+          </li>
+          <li class="contact">
+            <div class="wrap">
+              <span class="contact-status busy"></span>
+              <img src="http://emilcarlsson.se/assets/jessicapearson.png" alt="" />
+              <div class="meta">
+                <p class="name">Jessica Pearson</p>
+                <p class="preview">Have you finished the draft on the Hinsenburg deal?</p>
+              </div>
+            </div>
+          </li>
+          <li class="contact">
+            <div class="wrap">
+              <span class="contact-status"></span>
+              <img src="http://emilcarlsson.se/assets/haroldgunderson.png" alt="" />
+              <div class="meta">
+                <p class="name">Harold Gunderson</p>
+                <p class="preview">Thanks Mike! :)</p>
+              </div>
+            </div>
+          </li>
+          <li class="contact">
+            <div class="wrap">
+              <span class="contact-status"></span>
+              <img src="http://emilcarlsson.se/assets/danielhardman.png" alt="" />
+              <div class="meta">
+                <p class="name">Daniel Hardman</p>
+                <p class="preview">We'll meet again, Mike. Tell Jessica I said 'Hi'.</p>
+              </div>
+            </div>
+          </li>
+          <li class="contact">
+            <div class="wrap">
+              <span class="contact-status busy"></span>
+              <img src="http://emilcarlsson.se/assets/katrinabennett.png" alt="" />
+              <div class="meta">
+                <p class="name">Katrina Bennett</p>
+                <p class="preview">I've sent you the files for the Garrett trial.</p>
+              </div>
+            </div>
+          </li>
+          <li class="contact">
+            <div class="wrap">
+              <span class="contact-status"></span>
+              <img src="http://emilcarlsson.se/assets/charlesforstman.png" alt="" />
+              <div class="meta">
+                <p class="name">Charles Forstman</p>
+                <p class="preview">Mike, this isn't over.</p>
+              </div>
+            </div>
+          </li>
+          <li class="contact">
+            <div class="wrap">
+              <span class="contact-status"></span>
+              <img src="http://emilcarlsson.se/assets/jonathansidwell.png" alt="" />
+              <div class="meta">
+                <p class="name">Jonathan Sidwell</p>
+                <p class="preview"><span>You:</span> That's bullshit. This deal is solid.</p>
+              </div>
+            </div>
+          </li>
+        -->
+        </ul>
+      </div>
+      <div id="bottom-bar">
+        <button id="addcontact"><i class="fa fa-user-plus fa-fw" aria-hidden="true"></i> <span>Add contact</span></button>
+        <button id="sendSessionid"><i class="fa fa-cog fa-fw" aria-hidden="true"></i> <span>Settings</span></button>
+      </div>
+    </div>
+    <div class="content hidden">
+      <div class="contact-profile">
+        <img src="" alt="" />
+        <p></p>
+      </div>
+      <div class="messages">
+        <ul>
+          <!--
+          <li class="sent">
+            <img src="http://emilcarlsson.se/assets/mikeross.png" alt="" />
+            <p>How the hell am I supposed to get a jury to believe you when I am not even sure that I do?!</p>
+          </li>
+          <li class="replies">
+            <img src="http://emilcarlsson.se/assets/harveyspecter.png" alt="" />
+            <p>When you're backed against the wall, break the god damn thing down.</p>
+          </li>
+          <li class="replies">
+            <img src="http://emilcarlsson.se/assets/harveyspecter.png" alt="" />
+            <p>Excuses don't win championships.</p>
+          </li>
+          <li class="sent">
+            <img src="http://emilcarlsson.se/assets/mikeross.png" alt="" />
+            <p>Oh yeah, did Michael Jordan tell you that?</p>
+          </li>
+          <li class="replies">
+            <img src="http://emilcarlsson.se/assets/harveyspecter.png" alt="" />
+            <p>No, I told him that.</p>
+          </li>
+          <li class="replies">
+            <img src="http://emilcarlsson.se/assets/harveyspecter.png" alt="" />
+            <p>What are your choices when someone puts a gun to your head?</p>
+          </li>
+          <li class="sent">
+            <img src="http://emilcarlsson.se/assets/mikeross.png" alt="" />
+            <p>What are you talking about? You do what they say or they shoot you.</p>
+          </li>
+          <li class="replies">
+            <img src="http://emilcarlsson.se/assets/harveyspecter.png" alt="" />
+            <p>Wrong. You take the gun, or you pull out a bigger one. Or, you call their bluff. Or, you do any one of a hundred and forty six other things.</p>
+          </li>
+        -->
+        </ul>
+      </div>
+      <div class="message-input">
+        <div class="wrap">
+          <input id="myMessage" type="text" placeholder="Write your message..." />
+          <i class="fa fa-paperclip attachment" aria-hidden="true"></i>
+          <button id="sendbutton" class="submit"><i class="fa fa-paper-plane" aria-hidden="true"></i></button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src='//production-assets.codepen.io/assets/common/stopExecutionOnTimeout-b2a7b3fe212eaa732349046d8416e00a9dec26eb7fd347590fbced3ab38af52e.js'></script>
+  <script src='https://code.jquery.com/jquery-2.2.4.min.js'></script>
+  <script>
+    document.querySelector(".expand-button").addEventListener('click', function() {
+      document.querySelector("#profile").classList.toggle("expanded");
+      document.querySelector("#contacts").classList.toggle("expanded");
+    });
+
+
+    document.querySelector("#profile-img").addEventListener('click', function() {
+      document.querySelector("#status-options").classList.toggle("active");
+    });
+
+    var list = document.querySelectorAll("#status-options ul li")
+    for (var i = 0; i < list.length; i++) {
+      list[i].addEventListener('click', function() {
+        document.querySelector("#profile-img").classList = '';
+        document.querySelector("#status-online").classList.remove("active");
+        document.querySelector("#status-away").classList.remove("active");
+        document.querySelector("#status-busy").classList.remove("active");
+        document.querySelector("#status-offline").classList.remove("active");
+        this.classList.add("active");
+
+        if (document.querySelector("#status-online").classList.contains("active")) {
+          document.querySelector("#profile-img").classList.add("online");
+        } else if (document.querySelector("#status-away").classList.contains("active")) {
+          document.querySelector("#profile-img").classList.add("away");
+        } else if (document.querySelector("#status-busy").classList.contains("active")) {
+          document.querySelector("#profile-img").classList.add("busy");
+        } else if (document.querySelector("#status-offline").classList.contains("active")) {
+          document.querySelector("#profile-img").classList.add("offline");
+        } else {
+          document.querySelector("#profile-img").classList = '';
+        };
+
+        document.querySelector("#status-options").classList.remove("active");
+      });
+    }
+
+
+    document.querySelector('#addcontact').addEventListener('click', function() {
+      var contact = document.querySelector('#search').querySelector('input').value;
+      if (contact != '') {
+        addContact(contact);
+      }
+    });
+
+    function addContact(username) {
+      var li = document.createElement('li');
+      li.classList.add('contact');
+      li.setAttribute('username', username);
+      li.addEventListener('click', function() {
+        document.querySelector('.content').classList.remove('hidden');
+
+        socket.emit('fetchChat', localStorage.getItem('username'),this.getAttribute('username'));
+        var befor = document.querySelector('.contact.active');
+        if (befor != null) {
+          befor.classList.remove('active');
+        }
+        this.classList.add('active');
+
+
+        var contact_profile = document.querySelector('.contact-profile');
+        contact_profile.innerHTML = '';
+
+        var messages_ul = document.querySelector('.messages').querySelector('ul');
+        messages_ul.innerHTML = '';
+
+        contact_profile.appendChild(this.querySelector('.wrap').querySelector('img').cloneNode(true));
+
+        var p = document.createElement('p');
+        p.innerHTML = this.querySelector('.name').innerHTML;
+        contact_profile.appendChild(p);
+
+      });
+
+
+      var wrap = document.createElement('div');
+      wrap.classList.add('wrap');
+      li.appendChild(wrap);
+
+      var contact_status = document.createElement('span');
+      contact_status.classList.add('contact-status');
+      wrap.appendChild(contact_status);
+
+      var img = document.createElement('img');
+      img.setAttribute("src", "http://facharbeit-app.ddns.net:5000/static/profilbildfrau.png");
+      wrap.appendChild(img);
+
+      var meta = document.createElement('div');
+      meta.classList.add('meta');
+      wrap.appendChild(meta);
+
+      var name = document.createElement('p');
+      name.classList.add('name');
+      name.innerHTML = username;
+      meta.appendChild(name);
+
+      var preview = document.createElement('p');
+      preview.classList.add('preview')
+      meta.appendChild(preview);
+
+      document.querySelector('#contacts').querySelector('ul').appendChild(li);
+    }
+
+    var socket = io.connect('http://' + document.domain + ':' + location.port);
+
+    socket.on('connect', function() {
+      if (localStorage.hasOwnProperty('username')) {
+        socket.emit('username', localStorage.getItem('username'));
+        document.querySelector('#name').innerHTML = localStorage.getItem('username');
+      } else {
+        window.location.replace("http://facharbeit-app.ddns.net:5000/login");
+      }
+
+    });
+
+    document.querySelector('#sendbutton').addEventListener('click', sendPrivateMessage);
+    document.querySelector('#myMessage').addEventListener('keyup', function(event) {
+      if (event.keyCode == 13) {
+        sendPrivateMessage();
+      }
+    });
+
+
+
+    socket.on('new_private_message', function(msg) {
+      if (document.querySelector('.contact-profile').querySelector('p').innerHTML == msg.sender) {
+        setNewPrivateMessage(msg.message,'replies');
+        setNewPrivateMessageSidebar(msg.message, msg.sender);
+
+        //Scroll to Bottom
+        document.querySelector('.messages').scrollTop = document.querySelector('.messages').scrollHeight;
+      } else {
+        setNewPrivateMessageSidebar(msg.message, msg.sender);
+      }
+
+    });
+
+    socket.on('fetchChatResponse', function(response) {
+      json = JSON.parse(response);
+      for (var i = json.length-1; i >= 0; i--) {
+        if(json[i][0] == localStorage.getItem('username')){
+          setNewPrivateMessage(json[i][2],'sent');
+        }else{
+          setNewPrivateMessage(json[i][2],'replies');
+        }
+      }
+      //Scroll to Bottom
+      document.querySelector('.messages').scrollTop = document.querySelector('.messages').scrollHeight;
+    });
+
+
+    socket.on('loadChats', function(response) {
+      json = JSON.parse(response);
+      for (var i = 0; i < json.length; i++) {
+        setNewPrivateMessageSidebar('',json[i][0]);
+      }
+    });
+
+    function setNewPrivateMessageSidebar(message, message_sender) {
+
+      var contacts = document.querySelectorAll('.contact');
+      for (var i = 0; i < contacts.length; i++) {
+        if (contacts[i].getAttribute('username') == message_sender) {
+          contacts[i].querySelector('.preview').innerHTML = message;
+          contacts[i].parentNode.insertBefore(contacts[i],contacts[i].parentNode.firstChild);
+          //contacts[i].parentNode.removeChild(contacts[i]);
+          return null;
+        }
+      }
+      addContact(message_sender);
+      setNewPrivateMessageSidebar(message, message_sender);
+    }
+
+    function setNewPrivateMessage(message,string) {
+      var li = document.createElement('li');
+      li.classList.add(string)
+      var p = document.createElement('p');
+      p.innerHTML = message;
+      li.appendChild(p);
+      document.querySelector('.messages').querySelector('ul').appendChild(li);
+
+    }
+
+    function sendPrivateMessage() {
+      var message_to_send = document.querySelector('#myMessage').value;
+      if (message_to_send != '') {
+        var recipient = document.querySelector('.contact-profile').querySelector('p').innerHTML;
+        var sender = localStorage.getItem('username');
+        socket.emit('private_message', {
+          'username': recipient,
+          'message': message_to_send,
+          "sender": sender
+        });
+
+
+        setNewPrivateMessage(message_to_send,'sent');
+        //Scroll to Bottom
+        document.querySelector('.messages').scrollTop = document.querySelector('.messages').scrollHeight;
+
+        document.querySelector('#myMessage').value = "";
+
+        setNewPrivateMessageSidebar("<span>You:</span> " + message_to_send, recipient);
+      }
+    }
+  </script>
+</body>
+
+</html>
